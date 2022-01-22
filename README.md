@@ -4,4 +4,5 @@
 
 
 
-[PLAY THE GAME]('https://pixiedevpraveen.github.io/ticktackgame')
+[Click](https://pixiedevpraveen.github.io/ticktackgame)
+to play the game.
