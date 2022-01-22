@@ -1,6 +1,6 @@
 body {
     text-align: center;
-    min-height: 100vh;
+    height: clamp(500px, fit-content, 600px);
     display: flex;
     flex-direction: column;
     align-items: center;
