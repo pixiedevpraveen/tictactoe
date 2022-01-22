@@ -107,5 +107,5 @@ function undoState() {
 }
 
 document.getElementById("newMap").addEventListener("click", createNewMap);
-document.getElementById("getstate").addEventListener("click", getState);
-document.getElementById("undostate").addEventListener("click", undoState);
+document.getElementById("getState").addEventListener("click", getState);
+document.getElementById("undoState").addEventListener("click", undoState);
