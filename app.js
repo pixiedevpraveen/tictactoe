@@ -107,7 +107,7 @@ function getState() {
 function undoState() {
     if (localStorage.undoMapState) {
         map.innerHTML = localStorage.undoMapState;
-        localStorage.mapState = localStorage.undoMapState;
+        saveState();
     }
     else
         createNewMap();
