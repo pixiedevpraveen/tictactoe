@@ -59,6 +59,7 @@ let createNewMap = () => {
     }
     createEmptyArray();
     localStorage.mapState = '';
+    localStorage.undoMapState = '';
 }
 
 let addImg = (target) => {
@@ -85,13 +86,15 @@ map.addEventListener('click', function (e) {
     let target = e.target;
     if (target.classList.contains("tile")) {
         addImg(target);
-        isEnd();
+        // isEnd(); // @development
     }
     saveState();
 
 }, false);
 
-
+/**
+ * @utility methods
+ * */
 function saveState() {
     if (localStorage.mapState)
         localStorage.undoMapState = localStorage.mapState;
@@ -102,9 +105,22 @@ function getState() {
         map.innerHTML = localStorage.mapState;
 }
 function undoState() {
-    if (localStorage.undoMapState)
+    if (localStorage.undoMapState) {
         map.innerHTML = localStorage.undoMapState;
+        localStorage.mapState = localStorage.undoMapState;
+    }
+    else
+        createNewMap();
 }
+
+/**
+ * @startup methods
+*/
+function init() {
+    localStorage.undoMapState = '';
+}
+
+init();
 
 document.getElementById("newMap").addEventListener("click", createNewMap);
 document.getElementById("getState").addEventListener("click", getState);
