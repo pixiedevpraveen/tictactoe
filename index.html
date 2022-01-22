@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <h1>TICK TACK GAME</h1>
+        <button id="newMap">NEW GAME</button>
+
+        <section class="map-select">
+            <div class="tile">
+                <img src="assets/circle.png" class="tile-img circle" alt="circle">
+            </div>
+            <div class="tile">
+                <img src="assets/remove.png" class="tile-img cross" alt="cross">
+            </div>
+        </section>
+
+        <section class="map">
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+        </section>
+        <button id="getstate"><small>LOAD SAVED GAME</small></button>
+        <button id="undostate"><small>UNDO</small></button>
+        <script src="app.js"></script>
+    </body>
+
+</html>
