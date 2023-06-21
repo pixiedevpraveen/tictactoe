@@ -1,13 +1,19 @@
+:root {
+    --transition: .2s;
+}
+
 body {
     text-align: center;
+    font-family: sans-serif;
+    background-color: #101010;
+    color: white;
+}
+.container {
     height: clamp(500px, fit-content, 600px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-family: sans-serif;
-    background-color: #101010;
-    color: white;
 }
 
 h1 {
@@ -53,13 +59,19 @@ button {
     width: 64px;
     margin: 0.5rem 0.8rem;
     border: 2px white dashed;
+    transition: var(--transition) all;
 }
 
 .map-select .tile.active {
-    border: 2px solid green;
+    outline: 2px solid green;
+    outline-offset: 2px;
 }
 
 .tile img {
     filter: invert();
     width: 100%;
+}
+
+.disabled {
+    cursor: not-allowed;
 }

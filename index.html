@@ -8,35 +8,35 @@
         <link rel="stylesheet" href="style.css">
         <title>Tick Tack Game | Praveen Yadav</title>
         <meta name="description" content="Tick tack game using html, css and javascript made by Praveen Yadav">
+        <script src="src/petite-vue.js"></script>
+        <script src="src/main.js" type="module"></script>
     </head>
 
     <body>
         <h1>TICK TACK GAME</h1>
-        <button id="newMap">NEW GAME</button>
-
-        <section class="map-select">
-            <div class="tile">
-                <img src="assets/circle.png" class="tile-img circle" alt="circle">
-            </div>
-            <div class="tile">
-                <img src="assets/remove.png" class="tile-img cross" alt="cross">
-            </div>
-        </section>
-
-        <section class="map">
-            <div class="tile"></div>
-            <div class="tile"></div>
-            <div class="tile"></div>
-            <div class="tile"></div>
-            <div class="tile"></div>
-            <div class="tile"></div>
-            <div class="tile"></div>
-            <div class="tile"></div>
-            <div class="tile"></div>
-        </section>
-        <button id="getState"><small>LOAD SAVED GAME</small></button>
-        <button id="undoState"><small>UNDO</small></button>
-        <script src="app.js"></script>
+        <div class="container">
+            <button id="newMap" @click="methods.createNewMap">NEW GAME</button>
+            <section class="map-select">
+                <div class="tile" v-for="(player, index) in store.state.players" :key="index" :data-value="index"
+                    :class="{'active': store.state.currPlayer === index+1, 'disabled': store.state.currPlayer}"
+                    @click="store.state.currPlayer || methods.playerSelectClick($el, index+1)" :disabled="store.currPlayer">
+                    <img v-if="player" :src="player.img" class="tile-img" :class="player.alt" :alt="player.alt">
+                </div>
+            </section>
+            <section class="map">
+                <div class="tile" v-for="(tile, index) in [].concat(...store.state.tiles)" :key="index"
+                    @click="tile != 0 || methods.tileClick($el, {r:0, c:index})"
+                    :class="{'disabled': tile != 0 || store.state.gamePaused || store.state.gameEnd}">
+                    <img v-if="tile == 1" :src="store.state.players[0].img" class="tile-img"
+                        :class="store.state.players[0].alt" :alt="store.state.players[0].alt">
+                    <img v-else-if="tile == 2" :src="store.state.players[1].img" class="tile-img"
+                        :class="store.state.players[1].alt" :alt="store.state.players[1].alt">
+                </div>
+            </section>
+            <strong :style="{color: store.state.msgColor??'white'}">{{store.state.msg}}</strong>
+            <button id="getState" @click="store.getState"><small>LOAD SAVED GAME</small></button>
+            <button id="undoState" @click="store.undoState"><small>UNDO</small></button>
+        </div>
     </body>
 
 </html>
