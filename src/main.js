@@ -15,12 +15,8 @@ const store = PetiteVue.reactive({
         msgColor: null,
     },
     gameHistory: [],
-    getters: {
-        playerWithKey(_key) {
-            return store.state.players.filter(p => p.key == key)
-        }
-    },
     session: {
+        scene: 'game'
     },
     getState() {
         try {
@@ -91,11 +87,17 @@ const methods = {
             this.setGameEnd(true)
             setTimeout(() => {
                 this.setMsg(store.state.players[this.getWinner() - 1].name + " won the Game", { color: "green" })
+                store.gameHistory.push({ tiles: store.state.tiles, winner: this.getWinner(), players: store.state.players })
+                store.gameHistory.slice(-5)
+                localStorage.gameHistory = JSON.stringify(store.gameHistory)
             }, 200);
         } else if (this.getGameEnd()) {
             this.setGameEnd(true)
             setTimeout(() => {
                 this.setMsg("Game finished!", { color: "red" })
+                store.gameHistory.push({ tiles: store.state.tiles, winner: null, players: store.state.players })
+                store.gameHistory.slice(-5)
+                localStorage.gameHistory = JSON.stringify(store.gameHistory)
             }, 200);
         }
     },
