@@ -14,12 +14,21 @@
 
     <body>
         <h1>TICK TACK GAME</h1>
-        <div class="container">
-            <button id="newMap" @click="methods.createNewMap">NEW GAME</button>
+        <div class="d-flex mt-1 justify">
+            <small>
+                <button
+                    @click="store.session.scene=(store.session.scene === 'game'?'history':'game')">{{store.session.scene === 'game'?'history':'game'}}</button>
+            </small>
+            <small><button @click="store.undoState">UNDO</button></small>
+            <small><button @click="store.getState">LOAD SAVED</button></small>
+        </div>
+        <div class="container" v-if="store.session.scene === 'game'">
+            <button class="mt-1" @click="methods.createNewMap">NEW GAME</button>
             <section class="map-select">
-                <div class="tile" v-for="(player, index) in store.state.players" :key="index" :data-value="index"
+                <div class="tile" v-for="(player, index) in store.state.players" :key="player._id" :title="player.name"
                     :class="{'active': store.state.currPlayer === index+1, 'disabled': store.state.currPlayer}"
-                    @click="store.state.currPlayer || methods.playerSelectClick($el, index+1)" :disabled="store.currPlayer">
+                    @click="store.state.currPlayer || methods.playerSelectClick($el, index+1)"
+                    :disabled="store.currPlayer">
                     <img v-if="player" :src="player.img" class="tile-img" :class="player.alt" :alt="player.alt">
                 </div>
             </section>
@@ -34,8 +43,29 @@
                 </div>
             </section>
             <strong :style="{color: store.state.msgColor??'white'}">{{store.state.msg}}</strong>
-            <button id="getState" @click="store.getState"><small>LOAD SAVED GAME</small></button>
-            <button id="undoState" @click="store.undoState"><small>UNDO</small></button>
+            <div class="d-flex">
+                <label v-for="player in store.state.players" :key="player._id">Player {{player.key}} Name
+                    <input type="text" placeholder="Player name" v-model="player.name">
+                </label>
+            </div>
+        </div>
+        <div class="container" v-else-if="store.session.scene === 'history'">
+            <section class="mt-1">
+                <hr />
+                <div class="d-flex">
+                    <strong>Winner</strong>
+                    <strong>Player 1</strong>
+                    <strong>Player 2</strong>
+                </div>
+                <hr />
+                <div v-for="history in store.gameHistory" class="d-flex justify">
+                    <span v-if="history.winner">{{history.players[history.winner-1].name}}</span>
+                    <span v-else>...Draw...</span>
+                    <span>{{history.players[0].name}}</span>
+                    <span>{{history.players[1].name}}</span>
+                </div>
+                <hr />
+            </section>
         </div>
     </body>
 
