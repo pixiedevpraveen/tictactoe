@@ -124,6 +124,14 @@ const methods = {
         store.state.tiles = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
         this.setWinner()
         this.setGameEnd(false)
+        localStorage.undoState = ''
+    },
+    toggleFullScreen(el = document.getElementById("game")) {
+        if (document.fullscreenElement) {
+            document.exitFullscreen()
+        } else {
+            el.requestFullscreen ? el.requestFullscreen() : el.webkitRequestFullScreen()
+        }
     }
 }
 

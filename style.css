@@ -11,6 +11,7 @@ body {
 
 .container {
     height: clamp(500px, fit-content, 600px);
+    width: clamp(200px, fit-content, 400px);
     display: flex;
     flex-direction: column;
     align-items: center;
