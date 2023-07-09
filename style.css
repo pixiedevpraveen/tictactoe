@@ -34,14 +34,15 @@ h1 {
 
 button {
     padding: 1rem 2rem;
-    border: 2px solid #f15296;
     border-radius: 5px;
     background-color: #000000;
     color: #f15296;
+    border: 2px solid currentColor;
     font-weight: bold;
     text-transform: uppercase;
 }
 
+button.small,
 small>button {
     padding: .4rem 1rem;
     font-weight: 600;
@@ -95,6 +96,18 @@ small>button {
     width: 100%;
 }
 
+input:disabled {
+    background-color: whitesmoke;
+}
+
+:disabled,
 .disabled {
     cursor: not-allowed;
+}
+.text-green {
+    color: green;
+}
+
+body.started button {
+    opacity: .8;
 }
